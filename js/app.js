@@ -17,12 +17,11 @@ $(document).ready(function(){
   	// -------------------- //
 
 
-
 	var randomNumber = 1 + Math.floor(Math.random() * 100);
 	var guessCount = $("#count")
 
-	console.log(randomNumber);
 
+	console.log(randomNumber);
 
 
 
@@ -39,97 +38,113 @@ $(document).ready(function(){
 
 			$("#count").empty();
 			guessCount.html(function(i, val) { return val *0});
+
+			$("#userGuess").focus();
 		})
 	;
 
 
 
-
-
 	// ----- Hot or Cold Indicators ------ //
-
 
 	$(".game")
 		.on("click", "#guessButton", function() {
-			
+
 			var userGuess = $("#userGuess").val();
+			var compareNumbers = Math.abs(userGuess - randomNumber)
 			var output;
 			var newOutputLine;
 			var boxColor;
-			var compareNumbers = Math.abs(userGuess - randomNumber)
+
+			var tempOutput;
 			
-			guessCount.html(function(i, val) { return val *1+1});
-			
-			console.log(userGuess);
-		
-			if (userGuess == randomNumber) {
-					output = "you did it!";
-					boxColor = "#be9b0d";
+			var addTempLine = function() {
+
+				var makeTemp = $("<li>" + tempOutput + "</li>").addClass("temp").css("display", "inline");
+				
+				$("#guessList")
+					.prepend(makeTemp.fadeIn(100));
+
 			}
 
-			else if (userGuess.length == 0)	{
-					output = "need a number!";
+			$("#guessList li.temp").remove();
+
+			if (userGuess.length == 0)	{
+				tempOutput = "need a number!";
+				addTempLine();
 			}
 
 			else if (userGuess <= 0)	{
-					output = "too low! over 0 please";
+				tempOutput = "too low! over 0 please";
+				addTempLine();
 			}
 
 			else if (userGuess > 100)	{
-					output = "too high! under 100 please";
+				tempOutput = "too high! under 100 please";
+				addTempLine();
 			}
 
 			else if (userGuess % 1 != 0) {
-					output = "invalid number";
+				tempOutput = "invalid number";
+				addTempLine();
 			}
 
-			else if (compareNumbers < 5) {
-					output = "super hot!";
-					boxColor = "#be0000";
+			else {
+
+					if (userGuess == randomNumber) {
+						output = "you did it!";
+						boxColor = "#be9b0d";
+						}
+
+					else if (compareNumbers < 5) {
+						output = "super hot!";
+						boxColor = "#be0000";
+						}
+
+					else if (compareNumbers < 10) {
+						output = "hot!";
+						boxColor = "#c23939";
+						}
+
+					else if (compareNumbers < 15) {
+						output = "warm";
+						boxColor = "#c26f6b";
+						}
+
+					else if (compareNumbers < 20) {
+						output = "luke warm";
+						boxColor = "#c2a791";		
+						}
+
+					else if (compareNumbers < 25) {
+						output = "chilly";
+						boxColor = "#268dc2";
+						}
+
+					else if (compareNumbers < 30) {
+						output = "cold";
+						boxColor = "#1a6fa0";		
+						}		
+
+					// else if (compareNumbers < 50) {
+					// 	output = "super cold";
+					// 	boxColor = "#1257be";
+					// 	}
+
+					else if (compareNumbers < 60) {
+						output = "frigid";
+						boxColor = "#0911be";	
+						}
+
+					guessCount.html(function(i, val) { return val *1+1});
+
+					newOutputLine = $("<li>" + output + "</li>");
+
+					newOutputLine.css("background-color", boxColor);
+
+					$("#guessList")
+						.prepend(newOutputLine);
 			}
-
-			else if (compareNumbers < 10) {
-					output = "hot!";
-					boxColor = "#c23939";
-			}
-
-			else if (compareNumbers < 15) {
-					output = "warm";
-					boxColor = "#c26f6b";
-			}
-
-			else if (compareNumbers < 20) {
-					output = "luke warm";
-					boxColor = "#c2a791";		
-			}
-
-			else if (compareNumbers < 30) {
-					output = "chilly";
-					boxColor = "#268dc2";
-			}
-
-			else if (compareNumbers < 40) {
-					output = "cold";
-					boxColor = "#be9b0d";		
-			}		
-
-			else if (compareNumbers < 50) {
-					output = "super cold";
-					boxColor = "#1257be";
-			}
-
-			else if (compareNumbers < 60) {
-					output = "frigid";
-					boxColor = "#0911be";	
-			}
-
-			newOutputLine = $("<li>" + output + "</li>");
-
-			newOutputLine.css("background-color", boxColor);
-
-			$("#guessList")
-
-				.prepend(newOutputLine)
 
 			$("#userGuess").val('');
 

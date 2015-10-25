@@ -308,7 +308,8 @@ ul.guessBox {
 	color: #fff;
 	overflow: auto;
 }
-ul.guessBox li {
+
+ul.guessBox li, li.temp {
 	display: inline;
 	background-color: black;
 	padding: 0.3em;
