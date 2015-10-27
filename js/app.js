@@ -18,7 +18,7 @@ $(document).ready(function(){
 
 
 	var randomNumber = 1 + Math.floor(Math.random() * 100);
-	var guessCount = $("#count")
+	var guessCount = $("#count");
 
 
 	console.log(randomNumber);
@@ -28,7 +28,8 @@ $(document).ready(function(){
 	// ----- New Game Reset----- //
 
 
-		.on("click", ".new", function() {
+	$(".new")
+		.click (function(){
 			randomNumber = 0;
 			randomNumber = 1 + Math.floor(Math.random() * 100);
 
@@ -45,13 +46,15 @@ $(document).ready(function(){
 
 
 
+
+
 	// ----- Hot or Cold Indicators ------ //
 
 	$(".game")
 		.on("click", "#guessButton", function() {
 
 			var userGuess = $("#userGuess").val();
-			var compareNumbers = Math.abs(userGuess - randomNumber)
+			var compareNumbers = Math.abs(userGuess - randomNumber);
 			var output;
 			var newOutputLine;
 			var boxColor;
