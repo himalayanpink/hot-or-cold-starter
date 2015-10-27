@@ -27,7 +27,7 @@ $(document).ready(function(){
 
 	// ----- New Game Reset----- //
 
-	$("nav")
+
 		.on("click", ".new", function() {
 			randomNumber = 0;
 			randomNumber = 1 + Math.floor(Math.random() * 100);
@@ -126,12 +126,7 @@ $(document).ready(function(){
 						boxColor = "#1a6fa0";		
 						}		
 
-					// else if (compareNumbers < 50) {
-					// 	output = "super cold";
-					// 	boxColor = "#1257be";
-					// 	}
-
-					else if (compareNumbers < 60) {
+					else {
 						output = "frigid";
 						boxColor = "#0911be";	
 						}
